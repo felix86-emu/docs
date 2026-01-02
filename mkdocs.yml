@@ -4,10 +4,27 @@ site_url: https://felix86.com/docs
 repo_url: https://github.com/OFFTKP/felix86
 repo_name: OFFTKP/felix86
 
+nav:
+  - Home: index.md
+  - General:
+    - Glossary: general/glossary.md
+    - What is a rootfs?: general/rootfs-information.md
+  - For users:
+    - Supported devices: users/supported-devices.md
+    - Installation guide: users/installation-guide.md
+    - Usage guide: users/usage-guide.md
+    - Troubleshooting: users/troubleshooting.md
+  - For developers:
+    - Building instructions: devs/building-instructions.md
+    - Debugging: devs/debugging.md
+    - Allocations: devs/allocations.md
+
 theme:
   name: material
   logo: assets/favicon.png
   favicon: assets/favicon.png
+  features:
+    - content.code.copy
   icon:
     repo: fontawesome/brands/github
   palette:
@@ -33,3 +50,21 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
+
+extra:
+  generator: false
+
+markdown_extensions:
+  - footnotes
+  - smarty
+  - tables
+  - def_list
+  - admonition
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
