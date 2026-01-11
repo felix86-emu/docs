@@ -108,3 +108,34 @@ Extract it using `tar -xzf rootfs.tar.gz -C /path/to/rootfs` and set it using `f
 You can install packages inside the rootfs through felix86, or during rootfs creation by changing the `Run.sh` script.
 
 For an idea of what sort of packages you might need, check out [the rootfs generator repository](https://github.com/felix86-emu/rootfs).
+
+#### Important files
+
+During rootfs installation, some important files are copied to the rootfs. Currently, these are the following:
+```
+/etc/mtab
+/etc/passwd
+/etc/passwd-
+/etc/group
+/etc/group-
+/etc/shadow
+/etc/shadow-
+/etc/gshadow
+/etc/gshadow-
+/etc/hosts
+/etc/hostname
+/etc/timezone
+/etc/localtime
+/etc/fstab
+/etc/subuid
+/etc/subgid
+/etc/machine-id
+/etc/resolv.conf
+/etc/sudoers
+```
+
+Copy these to the rootfs while retaining the host permissions like so:
+```bash
+sudo cp -rp /etc/mtab $ROOTFS/etc/mtab
+```
+

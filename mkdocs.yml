@@ -13,6 +13,7 @@ nav:
     - Supported devices: users/supported-devices.md
     - Installation guide: users/installation-guide.md
     - Usage guide: users/usage-guide.md
+    - Steam: users/steam.md
     - Troubleshooting: users/troubleshooting.md
   - For developers:
     - Building instructions: devs/building-instructions.md

@@ -41,4 +41,34 @@ If you want to try a game that is not listed, you can make a compatibility repor
 
 ## Thunking
 
-There's thunking support for GLX (OpenGL on X11). You can enable it using `FELIX86_ENABLED_THUNKS=glx`. It is not perfect and may lead to problems.
+There's thunking support for GLX (OpenGL on X11) and Vulkan. You can enable it using `FELIX86_ENABLED_THUNKS=glx,vk`. This should improve performance for games.
+
+## DXVK
+
+Installing DXVK is as simple as installing it on your host system:
+```bash
+# Set $ROOTFS to the rootfs absolute path for convenience
+export ROOTFS=$(felix86 -g)
+
+# Copy DXVK release inside rootfs
+cp -r /path/to/dxvk-release $ROOTFS/tmp/
+
+# Enter felix86 shell
+felix86 --shell
+
+export WINEPREFIX=/path/to/wineprefix
+cd /tmp/dxvk-release
+cp x64/*.dll $WINEPREFIX/drive_c/windows/system32
+cp x32/*.dll $WINEPREFIX/drive_c/windows/syswow64
+
+# Run winecfg from inside felix86 shell and add native DLL overrides for
+# d3d8, d3d9, d3d10core, d3d11, dxgi.
+winecfg
+```
+
+Make sure to enable Vulkan thunking for better performance:
+```bash
+# Needs to be exported before entering felix86 shell
+export FELIX86_ENABLED_THUNKS=vk
+felix86 --shell
+```
