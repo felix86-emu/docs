@@ -15,6 +15,7 @@ nav:
     - Usage guide: users/usage-guide.md
     - Steam: users/steam.md
     - Troubleshooting: users/troubleshooting.md
+    - Uninstalling: users/uninstalling.md
   - For developers:
     - Building instructions: devs/building-instructions.md
     - Debugging: devs/debugging.md
