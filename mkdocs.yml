@@ -8,6 +8,7 @@ nav:
   - Home: index.md
   - General:
     - Glossary: general/glossary.md
+    - Socials: general/socials.md
     - What is a rootfs?: general/rootfs-information.md
   - For users:
     - Supported devices: users/supported-devices.md

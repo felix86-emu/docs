@@ -29,6 +29,8 @@ If you want to run a program outside the rootfs, you will be prompted to trust t
 /path/to/some/dir/MyGame.AppImage
 ```
 
+If not prompted for whatever reason, create `$HOME/.config/felix86/trusted.txt` and add the absolute path to the trusted directory.
+
 ## Compatibility
 
 There's a compatibility list:
@@ -41,7 +43,24 @@ If you want to try a game that is not listed, you can make a compatibility repor
 
 ## Thunking
 
-There's thunking support for GLX (OpenGL on X11) and Vulkan. You can enable it using `FELIX86_ENABLED_THUNKS=glx,vk`. This should improve performance for games.
+There's thunking support for GLX (OpenGL on X11) and Vulkan. You can enable it using `FELIX86_ENABLED_THUNKS=glx,vk`. This should improve performance in games.
+
+## Profiles
+
+You can use different execution profiles that set multiple configurations at once.
+
+Usage:
+```
+FELIX86_PROFILE=extreme felix86 --shell
+```
+
+There's currently the following profiles:    
+
+- `extreme` - Enables all optimizations, may break some games that rely on TSO.
+- `safe` - Enables safe optimizations and TSO mode.
+- `paranoid` - Disable almost all optimizations and enable some slow safety checks.
+
+Each profile is a .toml file in `$HOME/.config/felix86/profiles`. Each profile is a partial or full version of the `$HOME/.config/felix86/config.toml` file, with some configurations changed.
 
 ## DXVK
 
