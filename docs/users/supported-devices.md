@@ -2,7 +2,7 @@
 title: Supported devices
 ---
 
-Felix86 requires `rv64gv_zba_zbb_zbc_zbs` to work. RVA23 supports all of these extensions, so boards with RVA23 such as future SpacemiT K3 boards will be supported.
+Felix86 requires `rv64gv_zba_zbb_zbs` to work. RVA23 supports all of these extensions, so boards with RVA23 such as future SpacemiT K3 boards will be supported.
 
 SpacemiT K1 boards are also supported.
 
