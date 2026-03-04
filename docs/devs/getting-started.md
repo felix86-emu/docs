@@ -4,7 +4,7 @@ title: Getting started
 
 felix86 is an emulator, and emulators have endless amount of work to be done.
 
-If you've never used felix86 before, I recommend starting by testing it out. [Use the installation script](../users/installation-guide.md) or [check out the building instructions](./building_instructions.md) and try to run a simple program such as `glxgears`.
+If you've never used felix86 before, I recommend starting by testing it out. [Use the installation script](../users/installation-guide.md) or [check out the building instructions](./building-instructions.md) and try to run a simple program such as `glxgears`.
 
 There's multiple ways to contribute.
 
