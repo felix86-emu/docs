@@ -10,6 +10,8 @@ nav:
     - Glossary: general/glossary.md
     - Socials: general/socials.md
     - What is a rootfs?: general/rootfs-information.md
+  - Policies:
+    - Generative AI: policies/genai.md
   - For users:
     - Supported devices: users/supported-devices.md
     - Installation guide: users/installation-guide.md

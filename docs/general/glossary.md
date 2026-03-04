@@ -19,6 +19,8 @@ Some of these terms have specific meanings for felix86 that may not carry over t
 * **AVX**: Advanced Vector Extensions, the successor to the SSE extensions.
 
 #### B
+* **Biscuit**: A [runtime code generator for RISC-V](https://github.com/lioncash/biscuit).
+
 * **Block**: A basic block. A sequence of x86 instructions with no control flow until the last instruction of the sequence.
 
 * **Block linking**: A common JIT optimization where blocks that jump to a known address jump directly to the next block instead of performing address translation
