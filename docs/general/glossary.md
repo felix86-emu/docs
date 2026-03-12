@@ -30,6 +30,9 @@ Some of these terms have specific meanings for felix86 that may not carry over t
 
 * **Code cache**: A buffer containing the recompiled code.
 
+#### D
+* **Dispatcher**: A loop written in assembly that translates guest addresses to host addresses that point to recompiled blocks of code and runs them. Since it's written in assembly, we get to control the ABI and we get to jump to it from any point inside JIT code or from [safepoints](../devs/signals.md). See [allocations](../devs/allocations.md).
+
 #### F
 * **Fake mount**: A mechanism within felix86 that allows directories to appear as mounted without actually mounting them or using root permissions. See [rootfs information](./rootfs-information.md).
 
