@@ -55,6 +55,8 @@ Some of these terms have specific meanings for felix86 that may not carry over t
 * **RVV**: RISC-V Vector, a shorthand name of the vector extension, usually referring to version 1.0
 
 #### S
+* **Safepoints**: Points in the JIT code where it's safe to handle [deferred asynchronous signals](../devs/signals.md)
+
 * **SIMD**: Single instruction multiple data. A type of extension that defines instructions that operate on multiple packed values at once. Examples include SSE and RVV.
 
 * **SMC**: Self-modifying code. A recompiler (such as Mono found in Unity games) may modify it's own code to improve it. Felix86 uses SMC to perform block linking. SMC is detected with page protection of recompiled code.
