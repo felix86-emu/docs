@@ -37,6 +37,34 @@ When a signal handler is finished, it returns using the `rt_sigreturn` syscall. 
 
 With this solution, there's no problem of state being torn because the signal happened during recompiled code. There's also no problems when we are in host code, as asynchronous signals are always deferred and only handled in safepoints. Finally, there's no issues if a signal handler uses `longjmp`, as we always handle signals outside the host signal handler or C++ code.
 
+#### Effective deferred signals
+
+When an asynchronous signal is deferred, we set a bit in the `deferred_signals` variable in `ThreadState`. However, what happens if that signal is masked? If we activate safepoints, every basic block would fault, only for us to notice that the deferred signals are masked and must not be serviced. For this reason, we have a second variable, `effective_deferred_signals`, which essentially becomes `deferred_signals & ~signal_mask`. Thus, `effective_deferred_signals` gets changed when a signal is deferred, or when the mask changes.
+
+There's an important note about this: if a signal happens during a `sigsuspend`, it needs to be handled. If a signal happens during a guest `sigsuspend`, we handle it at a safepoint right after the syscall. This works fine because we update the RIP to point to the guest instruction after the syscall and the host `sigsuspend` returns `-EINTR`, so the emulated RAX register has `-EINTR`, so all is fine. However, we need to make sure `effective_deferred_signals` uses the `sigsuspend` signal mask, not the thread signal mask. For this reason, before entering the host `sigsuspend`, we set `signal_mask` to the mask passed to the guest `sigsuspend`, and restore it right after. When the safepoint is reached, the guest signal will be prepared, and the guest mask will change for what it needs to be to enter the signal handler, which means `effective_deferred_signals` will be updated to what it should be using the thread signal mask. This ensures that a `sigsuspend` doesn't allow more than one otherwise blocked signal to be serviced.
+
+**But when would a masked signal be deferred?**
+
+One could assume that if a signal is masked on the host, there shouldn't be a scenario where a masked signal can be in `deferred_signals`, thus making `effective_deferred_signals` not useful.
+
+However, here's two examples of where this could happen:
+
+Example 1:
+- Signal handlers installed for `SIGRT40` and `SIGRT41`
+- `sa_mask` for those signal handlers blocks every signal
+- Block all signals temporarily
+- `raise(SIGRT40)`, `raise(SIGRT41)`
+- Unblock all signals
+- Signal handler is reached for `SIGRT40`, `sa_mask` blocks all signals
+- `SIGRT41` is still deferred
+- Without `effective_deferred_signals`, safepoints would continue to fault for a deferred-but-blocked signal
+- With `effective_deferred_signals`, safepoints don't fault until the signal handler returns to unblock `SIGRT41`
+
+Example 2:
+- We use `SIGSEGV`, `SIGBUS` and `SIGILL` for internal emulator operations
+- We can't block these in the host
+- Thus leading to a situation where deferred signals exist, but they are blocked
+
 ### Problems
 
 This solution isn't perfect.
@@ -47,7 +75,7 @@ If a program spawns a thread, and that thread spams its parent with signals, it 
 
 **But why not mask them right when you defer?**
 
-While this might solve this particular problem, it's hard to properly implement. What if an asynchronous signal of another variety happens before you reach the safepoint? What if a synchronous signal happens? What if a process is spamming us with asynchronous SIGSEGV signals which we can't mask because we use them for emulator purposes?
+While this might solve this particular problem, it's hard to properly implement. What if an asynchronous signal of another variety happens before you reach the safepoint? What if a synchronous signal happens? What if a process is spamming us with asynchronous SIGSEGV signals which we can't mask because we use them for emulator purposes? Additionally, the safepoint needs to store the old `signal_mask`, so we can't change that variable until we are ready to service the signal.
 
 **What can be done about this?**
 
@@ -71,7 +99,7 @@ Currently, we use a vector that maps each x86 `rip` to a RISC-V `pc` for each bl
 
 ### Problems
 
-While this allows us to fetch the actual `rip` from the faulting `pc`, it has a memory overhead. Perhaps a better solution would be identifying all possible faulting points and updating the `gp` register right before they happen. However, this could incur a performance penalty. Another possibility would be mapping all possible faulting `pc` values to their `rip` directly. This should have lower memory overhead, at the expense of having to identify all possible faulting locations.
+While this allows us to fetch the actual `rip` from the faulting `pc`, it has a memory overhead. Perhaps a better solution would be identifying all possible faulting points and updating the `gp` register right before they happen. However, this could incur a performance penalty. Another possibility would be mapping all possible faulting `pc` values to their `rip` directly. This should have lower memory overhead, at the expense of having to identify all possible faulting locations. Another idea is to compile the block again in temporary memory to figure out exactly how many RISC-V instructions each x86 instruction takes to find the x86 RIP at the point of the faulting instruction.
 
 
-[^1]: Realtime signals may have multiple of the same signal being queued. We currently don't handle this behavior and only queue the latest, which is the correct behavior for non-realtime signals.
+[^1]: Realtime signals may have multiple of the same signal being queued. For those, we use a linked list, where each node is allocated using mmap, to avoid using malloc inside the signal handler.
