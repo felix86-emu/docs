@@ -50,6 +50,7 @@ One could assume that if a signal is masked on the host, there shouldn't be a sc
 However, here's two examples of where this could happen:
 
 Example 1:
+
 - Signal handlers installed for `SIGRT40` and `SIGRT41`
 - `sa_mask` for those signal handlers blocks every signal
 - Block all signals temporarily
@@ -61,6 +62,7 @@ Example 1:
 - With `effective_deferred_signals`, safepoints don't fault until the signal handler returns to unblock `SIGRT41`
 
 Example 2:
+
 - We use `SIGSEGV`, `SIGBUS` and `SIGILL` for internal emulator operations
 - We can't block these in the host
 - Thus leading to a situation where deferred signals exist, but they are blocked
