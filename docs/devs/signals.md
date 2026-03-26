@@ -83,8 +83,6 @@ Not much for a perfect solution.
 
 One idea could be to use a RISC-V interpreter to interpret code until a safepoint, inside the host signal handler, and immediately service the guest signal upon return from the host handler. This could work for when a signal happens during JIT code, but not when it happens outside it. For a perfect solution, we would perhaps have to mask signals during non-JIT code segments.
 
-Our current implementation can run programs that execute signals very frequently, like **Golang applications** with async preemption enabled. Since this problem (AFAIK) only happens in tests and not real-world applications, it is ignored for now.
-
 ## Synchronous signals
 
 Synchronous signals happen due to an instruction. For example, dividing by zero or accessing a nullptr. Synchronous signals are rarer, but programs like emulators may use signals like SIGSEGV to help with emulation, for example Dolphin can use SIGSEGV to detect memory accesses to I/O components and patch them with a function call.
