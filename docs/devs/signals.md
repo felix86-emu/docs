@@ -101,3 +101,11 @@ While this allows us to fetch the actual `rip` from the faulting `pc`, it has a 
 
 
 [^1]: Realtime signals may have multiple of the same signal being queued. For those, we use a linked list, where each node is allocated using mmap, to avoid using malloc inside the signal handler.
+
+## Emulator signals
+
+Some signals are used by the emulator because they are the most efficient way to emulate some feature. These aren't actually masked in the host.
+
+- `SIGSEGV` for self-modifying code detection
+- `SIGILL` for breakpoints (inserting an `EBREAK` would not cause the debugger to properly break like it does with `int3`, so an illegal instruction was used for breakpoints instead)
+- Signal #53 to send asynchronous ptrace attach/seize/traceme events
