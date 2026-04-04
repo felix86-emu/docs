@@ -23,6 +23,7 @@ nav:
     - Building instructions: devs/building-instructions.md
     - Debugging: devs/debugging.md
     - Allocations: devs/allocations.md
+    - Thunking: devs/thunking.md
     - Signals: devs/signals.md
 
 theme:

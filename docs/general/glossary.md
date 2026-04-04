@@ -55,7 +55,7 @@ Some of these terms have specific meanings for felix86 that may not carry over t
 * **RVV**: RISC-V Vector, a shorthand name of the vector extension, usually referring to version 1.0
 
 #### S
-* **Safepoints**: Points in the JIT code where it's safe to handle [deferred asynchronous signals](../devs/signals.md)
+* **Safepoints**: Points in the JIT code where it's safe to handle [deferred asynchronous signals](../devs/signals.md).
 
 * **SIMD**: Single instruction multiple data. A type of extension that defines instructions that operate on multiple packed values at once. Examples include SSE and RVV.
 
@@ -64,7 +64,7 @@ Some of these terms have specific meanings for felix86 that may not carry over t
 * **SSE**: Streaming SIMD Extensions, an x86 extension that adds XMM registers and SIMD instructions.
 
 #### T
-* **Thunks**: Special x86 libraries that call into host RISC-V code for performance.
+* **Thunks**: In felix86, refers to special x86 functions that call into host RISC-V code for performance. See [thunking](../devs/thunking.md).
 
 * **Trampolines**: Small pieces of assembly code that perform x86 to RISC-V or RISC-V to x86 ABI translations and jump to the recompiled code. The former is used for thunks, the latter is used for x86 callbacks.
 
