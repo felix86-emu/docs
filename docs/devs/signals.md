@@ -99,8 +99,9 @@ Currently, we use a vector that maps each x86 `rip` to a RISC-V `pc` for each bl
 
 While this allows us to fetch the actual `rip` from the faulting `pc`, it has a memory overhead. Perhaps a better solution would be identifying all possible faulting points and updating the `gp` register right before they happen. However, this could incur a performance penalty. Another possibility would be mapping all possible faulting `pc` values to their `rip` directly. This should have lower memory overhead, at the expense of having to identify all possible faulting locations. Another idea is to compile the block again in temporary memory to figure out exactly how many RISC-V instructions each x86 instruction takes to find the x86 RIP at the point of the faulting instruction.
 
+## Restartable syscalls
 
-[^1]: Realtime signals may have multiple of the same signal being queued. For those, we use a linked list, where each node is allocated using mmap, to avoid using malloc inside the signal handler.
+Some syscalls may be restarted in the kernel side after the signal handler. In the kernel, this is handled by setting the return RIP to point back to the syscall in the signal frame, and the RAX to the original value (which is the syscall number). We set `state->in_restartable_syscall` for some syscalls like `futex`, and if the syscall is interrupted and returns with `EINTR`, we restart it after the signal handler in a similar fashion. The host signal handler doesn't have `SA_RESTART` set for this reason.
 
 ## Emulator signals
 
@@ -109,3 +110,6 @@ Some signals are used by the emulator because they are the most efficient way to
 - `SIGSEGV` for self-modifying code detection
 - `SIGILL` for breakpoints (inserting an `EBREAK` would not cause the debugger to properly break like it does with `int3`, so an illegal instruction was used for breakpoints instead)
 - Signal #53 to send asynchronous ptrace attach/seize/traceme events
+
+
+[^1]: Realtime signals may have multiple of the same signal being queued. For those, we use a linked list, where each node is allocated using mmap, to avoid using malloc inside the signal handler.
