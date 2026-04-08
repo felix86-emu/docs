@@ -101,7 +101,7 @@ While this allows us to fetch the actual `rip` from the faulting `pc`, it has a 
 
 ## Restartable syscalls
 
-Some syscalls may be restarted in the kernel side after the signal handler. In the kernel, this is handled by setting the return RIP to point back to the syscall in the signal frame, and the RAX to the original value (which is the syscall number). We set `state->in_restartable_syscall` for some syscalls like `futex`, and if the syscall is interrupted and returns with `EINTR`, we restart it after the signal handler in a similar fashion. The host signal handler doesn't have `SA_RESTART` set for this reason.
+Some syscalls may be restarted in the kernel side after the signal handler. In the kernel, this is handled by setting the return RIP to point back to the syscall in the signal frame, and the RAX to the original value (which is the syscall number). We set `state->in_restartable_syscall` for some syscalls like `futex`, and if the syscall is interrupted and returns with `EINTR`, we restart it after the signal handler in a similar fashion. The host signal handler doesn't have `SA_RESTART` set for this reason. By checking if the syscall returned with `EINTR`, we are able to discern between syscalls that are interruptible based on their arguments, such as `read` which may be interruptible only if operating on "slow" devices.
 
 The reason for `state->in_restartable_syscall` is because some syscalls that are interrupted by signals that have `SA_RESTART` set **do not restart**, such as `sigsuspend`. For this reason, we explicitly declare which syscalls are restartable.
 
