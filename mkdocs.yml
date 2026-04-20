@@ -20,11 +20,12 @@ nav:
     - Troubleshooting: users/troubleshooting.md
     - Uninstalling: users/uninstalling.md
   - For developers:
-    - Building instructions: devs/building-instructions.md
+    - Getting started: devs/getting-started.md
     - Debugging: devs/debugging.md
     - Allocations: devs/allocations.md
     - Thunking: devs/thunking.md
     - Signals: devs/signals.md
+    - Tests: devs/tests.md
 
 theme:
   name: material
@@ -32,6 +33,7 @@ theme:
   favicon: assets/favicon.png
   features:
     - content.code.copy
+    - content.tabs.link
   icon:
     repo: fontawesome/brands/github
   palette:
@@ -75,3 +77,8 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
