@@ -74,9 +74,9 @@ Make sure [your RISC-V device is supported](./supported-devices.md) before insta
     ```
     bash <(curl -s https://install.felix86.com/rootfs.sh)
     ```
-    Building one yourself requires Docker.
+    There's many ways to create an x86 rootfs. The felix86 project uses Docker, but you can also use [Debootstrap](https://wiki.debian.org/Debootstrap) or other similar tools.
 
-    You can start using the example files below.
+    For Docker, you can start by using the example files below.
     === "Dockerfile"
         ```Dockerfile
         FROM ubuntu:24.04
@@ -147,6 +147,8 @@ Make sure [your RISC-V device is supported](./supported-devices.md) before insta
     ```
     sudo cp -rp /etc/mtab $ROOTFS/etc/mtab
     ```
+
+    It is recommended you also create a home directory for your user: `sudo mkdir "$ROOTFS/home/$USER" && sudo chown $USER:$USER "$ROOTFS/home/$USER"`
 
 !!! tip
     Install the rootfs in a path accessible by root, such as the default `/opt/felix86/rootfs`. Installing the rootfs in the home directory may lead to problems.
