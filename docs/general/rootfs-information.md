@@ -10,6 +10,7 @@ This means that the rootfs will also contain all the data that applications prod
 
 You can easily install new packages inside the rootfs. Once inside the felix86 shell (run `felix86 --shell`) you can use the package manager as normal. For example, if you installed the Ubuntu rootfs, `apt` can be used.
 
+The [installation guide](../users/installation-guide.md) provides info on automatic and manual rootfs installation.
 
 ## Does this mean I can only run applications that are inside the rootfs?
 
