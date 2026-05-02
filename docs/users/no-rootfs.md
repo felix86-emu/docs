@@ -14,7 +14,7 @@ The `FELIX86_NO_ROOTFS` environment variable will make felix86 not use a rootfs 
 ## Containers
 You may want to use a rootfs, but you want to use a proper containerization tool like `bwrap`, and real `mount` syscalls. `FELIX86_NO_ROOTFS` can help here too, as we want the containerization tool to be responsible for mounts/chroots, they should be disabled in the felix86 side.
 
-In this case, you need an existing x86 rootfs, and to copy over the felix86 libraries. On multiarch systems they probably need to go in `/lib/riscv64-linux-gnu`. On non-multiarch systems, they need some way to not conflict with the x86 libraries which may prove harder. These are the libraries felix86 loads on runtime: `libstdc++.so.6`, `libm.so.6`, `libgcc_s.so.1`, `libc.so.6`. Make sure the dynamic linker `ld-linux-riscv64-lp64d.so.1` is also copied over to the rootfs `/lib` directory.
+In this case, you need an existing x86 rootfs, and to copy over the felix86 libraries. On multiarch systems they probably need to go in `/lib/riscv64-linux-gnu`. On non-multiarch systems, they need some way to not conflict with the x86 libraries which may prove harder. These are the libraries felix86 loads at runtime: `libstdc++.so.6`, `libm.so.6`, `libgcc_s.so.1`, `libc.so.6`. Make sure the dynamic linker `ld-linux-riscv64-lp64d.so.1` is also copied over to the rootfs `/lib` directory.
 
 You may want to disable the config file too, otherwise felix86 might try to search in a path that it doesn't own and fail to load the configs.
 By disabling the config file, you may still pass configurations via environment variables.
@@ -42,4 +42,4 @@ Inside this emulated shell, you can confirm felix86 is used with `cat /proc/cpui
 
     The reason for this is that felix86 doesn't statically link, and statically linking would come with a set of problems. Because felix86 is dynamically linked, if an emulated app uses `chroot`/`pivot_root` and doesn't copy/mount the felix86 libraries and ld.so over to the new root, it won't be able to run.
 
-    If you want to run programs that rely on `chroot` and `pivot_root`, the recommended way is using felix86 with a rootfs (`FELIX86_NO_ROOTFS=0`). Tools like `proot` may or may not work, and haven't been tested.
+    If you want to run programs that rely on `chroot` and `pivot_root`, the recommended way is using felix86 with a rootfs (`FELIX86_NO_ROOTFS=0`). Tools like `proot` may or may not work and haven't been tested.
