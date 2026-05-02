@@ -24,4 +24,14 @@ As with most configurations, there's two options:
 - Set the `FELIX86_ROOTFS` environment variable (overrides config value)
 
 
+## But why a rootfs at all?
+
+If we don't use a rootfs and passthrough all the filesystem syscalls, then `chroot` and `pivot_root` syscalls would hide the path of the emulator. This means that if from inside a chrooted environment `execve` is called, the emulator won't be found. `binfmt_misc` fixes this with the `F` flag, however in the case of felix86, unless if we statically link, we won't be able to load the shared libraries. Even if we statically link, we won't be able to load host dynamic libraries for thunking.
+
+While applications that `chroot`/`pivot_root` are rare, `bwrap` which is used by Steam is one of them, and we want to support it by default.
+
+Additionally, we think that isolation of the x86 and RISC-V environments is neat, especially features such as being able to update your x86 rootfs via `apt` or similar, without risk of changing stuff in your host system. Without a rootfs, this is harder to do as you need to ensure the x86 binaries get installed in a different directory to not mess with your host binaries.
+
+There's ways to use felix86 [without a rootfs](../users/no-rootfs.md).
+
 [^1]: That being said, felix86 is not a security application. Only run applications you trust, not malware. VM escapes are possible.

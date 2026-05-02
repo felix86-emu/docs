@@ -18,6 +18,7 @@ nav:
     - Usage guide: users/usage-guide.md
     - Steam: users/steam.md
     - Troubleshooting: users/troubleshooting.md
+    - Using felix86 without a rootfs: users/no-rootfs.md
     - Uninstalling: users/uninstalling.md
   - For developers:
     - Getting started: devs/getting-started.md
