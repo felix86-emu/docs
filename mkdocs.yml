@@ -8,6 +8,7 @@ nav:
   - Home: index.md
   - General:
     - Glossary: general/glossary.md
+    - Art: general/art.md
     - Socials: general/socials.md
     - What is a rootfs?: general/rootfs-information.md
   - Policies:

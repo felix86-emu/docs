@@ -42,4 +42,4 @@ Inside this emulated shell, you can confirm felix86 is used with `cat /proc/cpui
 
     The reason for this is that felix86 doesn't statically link, and statically linking would come with a set of problems. Because felix86 is dynamically linked, if an emulated app uses `chroot`/`pivot_root` and doesn't copy/mount the felix86 libraries and ld.so over to the new root, it won't be able to run.
 
-    If you want to run programs that rely on `chroot` and `pivot_root`, the recommended way is using felix86 with a rootfs (`FELIX86_NO_ROOTFS=0`). Tools like `proot` may or may not work and haven't been tested.
+    If you want to run programs that rely on `chroot` and `pivot_root`, the recommended way is using felix86 with a rootfs (`FELIX86_NO_ROOTFS=0`). Tools like `proot` for emulating `chroot` in userspace may or may not work and haven't been tested.
