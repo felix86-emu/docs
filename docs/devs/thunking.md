@@ -5,12 +5,14 @@ title: Thunking
 Thunking in felix86 is using the host version of some libraries in place of the guest library.
 
 This has a few benefits:
+
 - Better performance, since code in host library is compiled with a compiler
-- Better compatibility, since now the userspace driver (USD) has the same memory model as the kernelspace driver (KSD)
+- Better compatibility, since now the userspace driver has the same memory model as the kernelspace driver
 - Less stuttering, as the host library doesn't need to be recompiled
 - More space in code cache before it needs to be cleared
 
 But also a few considerations:
+
 - Functions almost always have the same signature across architectures, but may have different struct alignment or packing
 - Functions that return pointers need to return them in the 32-bit address space for 32-bit apps
 - Functions that have variadic arguments need special handling
