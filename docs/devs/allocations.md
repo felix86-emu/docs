@@ -30,13 +30,13 @@ When in JIT code, the following allocation scheme takes place:
 | `r13` | `x22` / `s6` |
 | `r14` | `x19` / `s3` |
 | `r15` | `x20` / `s4` |
-| `rip` (start of current block) | `x3` / `gp`[^1] |
+| `rip` (start of current block) | `x27` / `s11` |
 | `cf` | `x21` / `s5` |
 | `zf` | `x23` / `s7` |
 | `sf` | `x24` / `s8` |
 | `of` | `x25` / `s9` |
 | `xmm0` - `xmm15` | `v16` - `v31`[^2] |
-| `ThreadState*` | `x27` / `s11` |
+| `ThreadState*` | `x3` / `gp`[^1] |
 | TLS | `x4` / `tp` |
 | Host stack | `x2` / `sp` |
 | Vector mask register | `v0` |
@@ -50,5 +50,5 @@ When in JIT code, the following allocation scheme takes place:
     Most of the GPR related allocations don't have a meaning behind their allocated RISC-V register and are purely random, except for `rdi`/`rsi`/`rdx`/`r10`/`r8`/`r9` which are allocated to `a0` - `a5`, following the x86-64 syscall ABI. This is currently unused but in a future version will allow saving some instructions when inlining certain syscalls.
 
 
-[^1]: We compile felix86 with `-mno-relax`, which frees up the `gp` register for us to use in the JIT.
+[^1]: We compile felix86 with `-mno-relax`, which frees up the `gp` register for us to use in the JIT. `gp` is not used by libraries, so we can access it at any time and inspect the ThreadState, which is particularly useful for `ptrace` emulation.
 [^2]: Using sequential registers starting with a number divisible by eight allows us to do grouping with eight registers for operations that need it.

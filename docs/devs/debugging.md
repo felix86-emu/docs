@@ -8,15 +8,15 @@ Debugging is inherently more difficult than most apps, as most of the time you a
 
 The emulated state of each process exists in the struct `ThreadState`. "Process" here refers to all cloned/forked processes, whether they are an actual "thread" or not.
 
-This state is statically allocated in the GPR `s11`.
+This state is statically allocated in the GPR `gp`. This register is disabled for use by the compiler with `-mno-relax`, and shared libraries don't use it either, so we place the `ThreadState` there so it is accessible at all times and even from host debuggers.
 
 !!! Tip
-    To inspect the current thread's ThreadState object, you can run `p/x *ThreadState::Get()`.
+    To inspect the current thread's `ThreadState` object, you can run `p/x *ThreadState::Get()` or `p/x *(ThreadState*)$gp`
 
 !!! Warning
     The register state in this struct may not be fully up to date, if the currently executing code is recompiled code. Some data may be modified in their respective RISC-V registers. To get their value you'd have to inspect the corresponding statically allocated host register. See [allocations](./allocations.md).
 
-When in JIT code, the current block `rip` is stored in `gp` register, viewed as `p/x $gp`. When not in JIT code, it can be viewed as `p/x ThreadState::Get()->rip`.
+When in JIT code, the current block `rip` is stored in `s11` register, viewed as `p/x $s11`. When not in JIT code, it can be viewed as `p/x ThreadState::Get()->rip`.
 
 Logs for every run are stored in `/tmp`. If felix86 is started with `FELIX86_QUIET` or through `felix86 --shell`, no logs will be generated. You can enter a shell with `felix86 /path/to/rootfs/bin/bash` to enable logging.
 
