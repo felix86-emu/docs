@@ -20,3 +20,7 @@ Installing a discrete GPU isn't plug-and-play on current RISC-V hardware.
 
 - For SpacemiT K1, see this thread: [https://community.milkv.io/t/amd-radeon-rx550-gpu-not-working/2869/23](https://community.milkv.io/t/amd-radeon-rx550-gpu-not-working/2869/23)
 - For SpacemiT K3, see this post: [https://www.reddit.com/r/RISCV/comments/1tkrrmo/crysis_on_spacemit_k3_with_felix86/](https://www.reddit.com/r/RISCV/comments/1tkrrmo/crysis_on_spacemit_k3_with_felix86/)
+
+## Unity games exit without doing anything
+
+Make sure you don't have `SDL_VIDEODRIVER=wayland`, set it to `SDL_VIDEODRIVER=x11` or `SDL_VIDEODRIVER=wayland,x11`. This isn't a felix86 problem, some RISC-V boards define this in `/etc/environment`.
