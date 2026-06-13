@@ -27,12 +27,12 @@ Make sure [your RISC-V device is supported](./supported-devices.md) before insta
     You need a C and C++ compiler like GCC or Clang, and CMake. If you want to build with thunking, and you should, you may need X11/GLX/Vulkan/Wayland header files. Linking is done at runtime using `dlopen`, so for thunking to properly work you also need the libraries themselves.
     === "Archlinux"
         ```
-        sudo pacman -S --needed base-devel cmake libx11 mesa vulkan-devel vulkan-tools wayland
+        sudo pacman -S --needed base-devel cmake pkgconf libx11 mesa vulkan-devel wayland
         ```
 
     === "Ubuntu/Debian"
         ```
-        sudo apt install build-essential cmake libx11-dev libgl1-mesa-dev libglx-dev libvulkan-dev vulkan-tools libwayland-dev
+        sudo apt install build-essential cmake pkg-config libx11-dev libgl1-mesa-dev libglx-dev libvulkan-dev libwayland-dev
         ```
 
     If you're cross-compiling, you need to install the RISC-V build tools.
