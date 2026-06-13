@@ -92,3 +92,25 @@ Make sure to enable Vulkan thunking for better performance:
 export FELIX86_ENABLED_THUNKS=vk
 felix86 --shell
 ```
+
+## gl4es
+
+[gl4es](https://github.com/ptitSeb/gl4es) allows for using OpenGL on PowerVR iGPUs in RISC-V boards, as those GPUs only have GLES support. 
+
+For ease of use, a wrapper script `felix86-gl4es` exists. The script will set relevant environment variables and start felix86.
+
+You can install it like so:
+```bash
+bash <(curl -fsSL https://install.felix86.com/gl4es.sh)
+```
+
+This will also install the gl4es libraries compiled for RISC-V.
+
+On current RISC-V distros, many games may require also setting `SDL_VIDEODRIVER=x11`:
+```bash
+// Enter an emulated shell
+SDL_VIDEODRIVER=x11 felix86-gl4es
+```
+
+!!! Warning
+    There's currently no 32-bit thunking, so you need to try 64-bit games if you want to use the iGPU. A discrete GPU, like an AMD one, will be able to use the x86 drivers and not require thunking, so 32-bit games will work fine with a discrete GPU. 
