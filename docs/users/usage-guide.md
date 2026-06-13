@@ -104,9 +104,9 @@ You can install it like so:
 bash <(curl -fsSL https://install.felix86.com/gl4es.sh)
 ```
 
-This will also install the gl4es libraries compiled for RISC-V.
+This will install the gl4es libraries compiled for RISC-V and the wrapper script.
 
-On current RISC-V distros, many games may require also setting `SDL_VIDEODRIVER=x11`:
+On current RISC-V distros, many games may also require setting `SDL_VIDEODRIVER=x11`:
 ```bash
 // Enter an emulated shell
 SDL_VIDEODRIVER=x11 felix86-gl4es
