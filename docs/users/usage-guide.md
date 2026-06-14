@@ -95,21 +95,50 @@ felix86 --shell
 
 ## gl4es
 
-[gl4es](https://github.com/ptitSeb/gl4es) allows for using OpenGL on PowerVR iGPUs in RISC-V boards, as those GPUs only have GLES support. 
+[gl4es](https://github.com/ptitSeb/gl4es) allows for using OpenGL on iGPUs in RISC-V boards, as those GPUs don't support desktop OpenGL.
 
-For ease of use, a wrapper script `felix86-gl4es` exists. The script will set relevant environment variables and start felix86.
+!!! danger "The iGPUs suck"
+    Use a discrete GPU, if possible, as they tend to have way better Linux support and performance. When using a discrete GPU gl4es is not necessary.
 
-You can install it like so:
-```bash
-bash <(curl -fsSL https://install.felix86.com/gl4es.sh)
+=== "Downloading gl4es"
+    You can download a prebuilt version of gl4es: [https://cdn.felix86.com/misc/gl4es/gl4es.zip](http://cdn.felix86.com/misc/gl4es/gl4es.zip)
+
+=== "Building gl4es"
+    To build gl4es from source, follow the instructions below.
+    ```shell
+    sudo apt update
+    sudo apt install libx11-dev
+    git clone https://github.com/ptitSeb/gl4es
+    cd gl4es
+    cmake -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    cmake --build build -j$(nproc)
+    ```
+
+### Installation 
+
+Install the library to a known host location, such as `/opt/felix86/gl4es/`.
+From the directory that contains the unzipped/built `libGL.so.1`, run the following:
+```shell
+export INSTALLATION_DIR="/opt/felix86/gl4es"
+sudo mkdir -p $INSTALLATION_DIR
+sudo mv ./libGL.so.1 $INSTALLATION_DIR
 ```
 
-This will install the gl4es libraries compiled for RISC-V and the wrapper script.
+Make sure to symlink `libGLX.so.0`, as gl4es exports the libGLX symbols:
+```shell
+sudo ln -s libGL.so.1 "$INSTALLATION_DIR/libGLX.so.0"
+```
 
-On current RISC-V distros, many games may also require setting `SDL_VIDEODRIVER=x11`:
-```bash
-// Enter an emulated shell
-SDL_VIDEODRIVER=x11 felix86-gl4es
+### Usage
+
+In order to use gl4es you need to set `LD_LIBRARY_PATH` and enable thunking:
+```shell
+export SDL_VIDEODRIVER=x11 # may be required for some games
+export FELIX86_ENABLED_THUNKS=glx,egl
+export FELIX86_QUIET=1
+export LIBGL_NOBANNER=1
+export LD_LIBRARY_PATH="$INSTALLATION_DIR:$LD_LIBRARY_PATH"
+felix86 --shell
 ```
 
 !!! Warning
