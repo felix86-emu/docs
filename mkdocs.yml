@@ -16,6 +16,7 @@ nav:
   - For users:
     - Supported devices: users/supported-devices.md
     - Installation guide: users/installation-guide.md
+    - AMDGPU installation guide: users/amdgpu.md
     - Usage guide: users/usage-guide.md
     - Steam: users/steam.md
     - Troubleshooting: users/troubleshooting.md

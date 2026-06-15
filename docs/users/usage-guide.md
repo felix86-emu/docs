@@ -135,7 +135,6 @@ In order to use gl4es you need to set `LD_LIBRARY_PATH` and enable thunking:
 ```shell
 export SDL_VIDEODRIVER=x11 # may be required for some games
 export FELIX86_ENABLED_THUNKS=glx,egl
-export FELIX86_QUIET=1
 export LIBGL_NOBANNER=1
 export LD_LIBRARY_PATH="$INSTALLATION_DIR:$LD_LIBRARY_PATH"
 felix86 --shell
