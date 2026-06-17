@@ -16,11 +16,9 @@ Both were confirmed to work.
 
 You will need an M.2 M-Key riser. 
 
-Starting with https://archive.spacemit.com/image/k3/version/bianbu/v4.0/ as a base, we need to install a custom kernel.
+Starting with `Bianbu-LXQt-K3-v4.0-20260430170328.tar.gz` from [https://archive.spacemit.com/image/k3/version/bianbu/v4.0/](https://archive.spacemit.com/image/k3/version/bianbu/v4.0/) as a base, we need to install a custom kernel.
 
-Make sure to finish the initial distro setup and connect to Wi-Fi, as we are going to use ssh.
-
-Take note of the board local IP.
+Flashed it to the board using the SpacemiT TitanTools utility. Make sure to finish the initial distro setup and connect to Wi-Fi, as we are going to use ssh. Also take note of the board local IP.
 
 On your x86 system, run the following commands:
 ```bash
@@ -41,12 +39,9 @@ cp ./arch/riscv/boot/Image.gz ./staging/vmlinuz-${KVER}
 cp .config ./staging/config-${KVER}
 ```
 
-Then copy over to your board. I used rsync for this:
-```bash
-rsync -avP "./staging/"  offtkp@192.168.1.62:~/staging
-```
+Then copy `./staging` to your board, and SSH there.
 
-Now on your remote system run the following
+Now on your remote system run the following:
 ```bash
 export KVER="6.18.3+"
 sudo mv ~/staging/vmlinuz-${KVER} /boot/vmlinuz-${KVER}
@@ -88,6 +83,12 @@ sudo apt update
 sudo apt install linux-firmware
 sudo apt upgrade
 sudo sed -i 's/^MESA_LOADER/#MESA_LOADER/' /etc/environment
+```
+
+Afterwards I restore the Bianbu sources, as some packages from the Ubuntu sources will conflict with versions downloaded from Bianbu sources. If you want to tinker further you may remove the Bianbu packages and install Ubuntu packages.
+```bash
+sudo mv /etc/apt/sources.list.d/bianbu.bak /etc/apt/sources.list.d/bianbu.sources
+sudo mv /etc/apt/sources.list.d/ubuntu.source /etc/apt/sources.list.d/ubuntu.bak
 ```
 
 Finally, update the initramfs:
