@@ -133,6 +133,7 @@ sudo ln -s libGL.so.1 "$INSTALLATION_DIR/libGLX.so.0"
 
 In order to use gl4es you need to set `LD_LIBRARY_PATH` and enable thunking:
 ```shell
+export INSTALLATION_DIR="/opt/felix86/gl4es"
 export SDL_VIDEODRIVER=x11 # may be required for some games
 export FELIX86_ENABLED_THUNKS=glx,egl
 export LIBGL_NOBANNER=1
