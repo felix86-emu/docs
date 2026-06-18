@@ -118,6 +118,16 @@ Make sure [your RISC-V device is supported](./supported-devices.md) before insta
 
     Unzip this rootfs to your target directory on your RISC-V machine, and set it using `felix86 --set-rootfs /path/to/rootfs`
 
+    Create the directories that will get mounted inside the rootfs:
+    ```
+    sudo mkdir -p $ROOTFS/dev
+    sudo mkdir -p $ROOTFS/proc
+    sudo mkdir -p $ROOTFS/sys
+    sudo mkdir -p $ROOTFS/run
+    sudo mkdir -p $ROOTFS/tmp
+    sudo mkdir -p $ROOTFS/home
+    ```
+
     ### Important files
 
     During rootfs installation, some important files are copied to the rootfs. Currently, these are the following:
@@ -147,8 +157,6 @@ Make sure [your RISC-V device is supported](./supported-devices.md) before insta
     ```
     sudo cp -rp /etc/mtab $ROOTFS/etc/mtab
     ```
-
-    It is recommended you also create a home directory `sudo mkdir -p "$ROOTFS/home"`
 
 !!! tip
     Install the rootfs in a path accessible by root, such as the default `/opt/felix86/rootfs`. Installing the rootfs in the home directory may lead to problems.
