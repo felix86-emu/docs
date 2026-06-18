@@ -148,11 +148,9 @@ Make sure [your RISC-V device is supported](./supported-devices.md) before insta
     sudo cp -rp /etc/mtab $ROOTFS/etc/mtab
     ```
 
-    It is recommended you also create a home directory for your user: `sudo mkdir "$ROOTFS/home/$USER" && sudo chown $USER:$USER "$ROOTFS/home/$USER"`
+    It is recommended you also create a home directory `sudo mkdir -p "$ROOTFS/home"`
 
 !!! tip
     Install the rootfs in a path accessible by root, such as the default `/opt/felix86/rootfs`. Installing the rootfs in the home directory may lead to problems.
-
-After installation you can run 32-bit and 64-bit x86 apps inside the rootfs, or outside the rootfs if the directory is trusted.
 
 Consult the [usage guide](./usage-guide.md) for further info.

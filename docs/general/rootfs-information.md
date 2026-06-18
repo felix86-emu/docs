@@ -14,7 +14,7 @@ The [installation guide](../users/installation-guide.md) provides info on automa
 
 ## Does this mean I can only run applications that are inside the rootfs?
 
-No. Recent versions of felix86 implement the concept of "trusted directories". The first time you run an application outside the rootfs you will be prompted to trust the parent directory. Doing so will allow you to run the application and any subdirectories and files will be visible to the application. Since guest programs can truly only see inside the rootfs, the fake mount mechanism used for `/dev` & co is used for trusted directories as well.
+Yes, or ones in $HOME if `FELIX86_MOUNT_HOME` is enabled, which it is by default.
 
 ## How can I change my rootfs?
 

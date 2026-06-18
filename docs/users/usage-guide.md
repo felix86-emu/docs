@@ -24,12 +24,7 @@ If installed in binfmt_misc (handled by install script, or with `sudo -E felix86
 /path/to/rootfs/MyGame.AppImage
 ```
 
-If you want to run a program outside the rootfs, you will be prompted to trust the parent directory:
-```bash
-/path/to/some/dir/MyGame.AppImage
-```
-
-If not prompted for whatever reason, create `$HOME/.config/felix86/trusted.txt` and add the absolute path to the trusted directory.
+By default `/home` will be mounted inside the rootfs.
 
 ## Compatibility
 
