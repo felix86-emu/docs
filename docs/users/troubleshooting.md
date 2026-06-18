@@ -11,6 +11,11 @@ If you understand the risk and want to run privileged executables through felix8
 sudo felix86 --binfmt-misc-setuid
 ```
 
+Alternatively, if you just want to run a privileged command once, you can enter a privileged shell:
+```
+sudo felix86 --shell
+```
+
 ## AppImages don't work
 
 See [Privileged executables don't work](#privileged-executables-dont-work), since AppImage uses `fusermount3` which is marked as setuid.

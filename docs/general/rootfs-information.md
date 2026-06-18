@@ -8,7 +8,7 @@ In order to use felix86, you need a rootfs -- a directory that contains all the 
 
 This means that the rootfs will also contain all the data that applications produce. For example, if a game normally saves to `/home/ubuntu/.config/MyGame/data.toml`, when ran through felix86 the actual location will be at `/opt/felix86/rootfs/home/ubuntu/.config/MyGame/data.toml`.
 
-You can easily install new packages inside the rootfs. Once inside the felix86 shell (run `felix86 --shell`) you can use the package manager as normal. For example, if you installed the Ubuntu rootfs, `apt` can be used.
+You can easily install new packages inside the rootfs. Once inside a privileged felix86 shell (run `sudo felix86 --shell`) you can use the package manager as normal. For example, if you installed the Ubuntu rootfs, `apt` can be used.
 
 The [installation guide](../users/installation-guide.md) provides info on automatic and manual rootfs installation.
 
