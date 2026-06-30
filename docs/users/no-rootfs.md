@@ -5,14 +5,14 @@ title: Using without a rootfs
 !!! Warning
     Using felix86 without a rootfs isn't the recommended way, but it exists for users or developers who are willing to tinker.
 
-felix86 is designed to [use a rootfs](../general/rootfs-information.md) to allow for isolating an x86 environment and its files, while also not requiring root permissions for ease of use. The rootfs gives no security guarantees, it may be possible to escape it and modify files outside, as the chroot and mounts are purely emulated.
+felix86 is designed to [use a rootfs](../general/faq.md) to allow for isolating an x86 environment and its files, while also not requiring root permissions for ease of use. The rootfs gives no security guarantees, it may be possible to escape it and modify files outside, as the chroot and mounts are purely emulated.
 
 However, you may be developing a VM environment similar to [muvm](https://github.com/AsahiLinux/muvm) that wants to use felix86, or you are more of a power user, or you want to use some container tool. In these cases, it may be worthy to not use a rootfs.
 
 The `FELIX86_NO_ROOTFS` environment variable will make felix86 not use a rootfs and passthrough all filesystem syscalls to the kernel.
 
 ## Containers
-You may want to use a rootfs, but you want to use a proper containerization tool like `bwrap`, and real `mount` syscalls. `FELIX86_NO_ROOTFS` can help here too, as we want the containerization tool to be responsible for mounts/chroots, they should be disabled in the felix86 side.
+You may want to use a rootfs, but with a proper containerization tool like `bwrap`, and real `mount` syscalls. `FELIX86_NO_ROOTFS` can help here too, as we want the containerization tool to be responsible for mounts/chroots, they should be disabled in the felix86 side.
 
 In this case, you need an existing x86 rootfs, and to copy over the felix86 libraries. On multiarch systems they probably need to go in `/lib/riscv64-linux-gnu`. On non-multiarch systems, they need some way to not conflict with the x86 libraries which may prove harder. These are the libraries felix86 loads at runtime: `libstdc++.so.6`, `libm.so.6`, `libgcc_s.so.1`, `libc.so.6`. Make sure the dynamic linker `ld-linux-riscv64-lp64d.so.1` is also copied over to the rootfs `/lib` directory.
 

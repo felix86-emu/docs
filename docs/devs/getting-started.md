@@ -2,7 +2,7 @@
 title: Getting started
 ---
 
-felix86 is an emulator, and emulators have endless amount of work to be done.
+felix86 is an emulator, and emulators have endless amounts of work to be done.
 
 If you've never used felix86 before, I recommend starting by testing it out. [Use the installation script](../users/installation-guide.md) or [check out the building instructions](../users/installation-guide.md#manual) and try to run a simple program such as `glxgears`.
 
@@ -35,9 +35,11 @@ Try to find a non-optimal instruction sequence and optimize it!
 
 ## Debugging tips
 
-As of right now, felix86 cannot emulate programs that use `ptrace`, such as `gdb` or `strace`. As such, you need to use the host versions of these commands. [There's some tips to make your life easier](./debugging.md).
+[There's some tips to make your life easier](./debugging.md).
 
-Sometimes the host `strace` is useful when chasing bugs in the emulator itself, or want a more complete trace. Make sure to filter out some syscalls that are frequently use and spammy, such as `riscv_flush_icache` and `rt_sigprocmask`. Make sure to capture all processes, using the `-f` argument in `strace`.
+Some guest-side debuggers like winedbg can be useful.
+
+Many times the host `strace` is useful when chasing bugs in the emulator itself, or want a more complete trace. Make sure to filter out some syscalls that are frequently use and spammy, such as `riscv_flush_icache` and `rt_sigprocmask`. Make sure to capture all processes, using the `-f` argument in `strace`.
 
 ## Profiling games
 

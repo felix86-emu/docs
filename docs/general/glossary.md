@@ -34,7 +34,7 @@ Some of these terms have specific meanings for felix86 that may not carry over t
 * **Dispatcher**: A loop written in assembly that translates guest addresses to host addresses that point to recompiled blocks of code and runs them. Since it's written in assembly, we get to control the ABI and we get to jump to it from any point inside JIT code or from [safepoints](../devs/signals.md). See [allocations](../devs/allocations.md).
 
 #### F
-* **Fake mount**: A mechanism within felix86 that allows directories to appear as mounted without actually mounting them or using root permissions. See [rootfs information](./rootfs-information.md).
+* **Fake mount**: A mechanism within felix86 that allows directories to appear as mounted without actually mounting them or using root permissions. See [What is a rootfs?](./faq.md) in the FAQ.
 
 #### I
 * **Invalidations**: Blocks become invalid when their x86 instructions are modified (see SMC). When invalidated, blocks that link to them need to be unlinked and the invalid block needs to be compiled again.
@@ -48,7 +48,7 @@ Some of these terms have specific meanings for felix86 that may not carry over t
 * **Profiles**: A way to fully or partially override a specific set of configurations in felix86. Set using the `FELIX86_PROFILE` environment variable as a path to a configuration file.
 
 #### R
-* **Rootfs**: See [rootfs](./rootfs-information.md). A directory containing the necessary x86/x86-64 libraries and binaries to run your applications and games.
+* **Rootfs**: See [What is a rootfs?](./faq.md) in the FAQ. A directory containing the necessary x86/x86-64 libraries and binaries to run your applications and games.
 
 * **RVA23**: A RISC-V profile, which is a set of ISA features, such as RISC-V extensions. Felix86 does not currently require RVA23.
 

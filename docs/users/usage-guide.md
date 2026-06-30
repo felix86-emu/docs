@@ -9,9 +9,9 @@ felix86 --shell
 
 This will disable logging and start a bash or zsh shell with a custom prompt.
 
-If you want logging to be enabled, execute the shell manually:
+If you want logging to be enabled, use this command:
 ```bash
-felix86 /path/to/rootfs/bin/bash
+felix86 --shell-debug
 ```
 
 If you don't want a shell, you can just run the program directly:
@@ -24,7 +24,7 @@ If installed in binfmt_misc (handled by install script, or with `sudo -E felix86
 /path/to/rootfs/MyGame.AppImage
 ```
 
-By default `/home` will be mounted inside the rootfs.
+By default `/home` will be mounted inside the rootfs, so you can also run x86 programs from `$HOME`.
 
 ## Compatibility
 
@@ -71,6 +71,7 @@ cp -r /path/to/dxvk-release $ROOTFS/tmp/
 # Enter felix86 shell
 felix86 --shell
 
+# Usually export WINEPREFIX="$HOME/.wine"
 export WINEPREFIX=/path/to/wineprefix
 cd /tmp/dxvk-release
 cp x64/*.dll $WINEPREFIX/drive_c/windows/system32
