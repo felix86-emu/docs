@@ -27,12 +27,12 @@ Make sure [your RISC-V device is supported](./supported-devices.md) before insta
     You need a C and C++ compiler like GCC or Clang, and CMake. If you want to build with thunking, and you should, you may need X11/GLX/Vulkan/Wayland header files. Linking is done at runtime using `dlopen`, so for thunking to properly work you also need the libraries themselves.
     === "Archlinux"
         ```
-        sudo pacman -S --needed base-devel cmake pkgconf libx11 mesa vulkan-devel wayland
+        sudo pacman -S --needed base-devel cmake pkgconf libx11 mesa vulkan-devel wayland nasm
         ```
 
     === "Ubuntu/Debian"
         ```
-        sudo apt install build-essential cmake pkg-config libx11-dev libgl1-mesa-dev libglx-dev libvulkan-dev libwayland-dev
+        sudo apt install build-essential cmake pkg-config libx11-dev libgl1-mesa-dev libglx-dev libvulkan-dev libwayland-dev nasm
         ```
 
     If you're cross-compiling, you need to install the RISC-V build tools.
@@ -46,13 +46,42 @@ Make sure [your RISC-V device is supported](./supported-devices.md) before insta
         sudo apt install gcc-riscv64-linux-gnu g++-riscv64-linux-gnu
         ```
 
+    ## Preparation
+    If compiling on RISC-V hardware, you'll need x86-64 binutils to build the x86-64 VDSO.
+
+    If your package manager provides x86-64 binutils, simply install them. Otherwise, you can follow the steps below. This is a one-time installation:
+    ```sh
+    sudo apt update
+    sudo apt install -y build-essential bison flex texinfo libgmp-dev libmpfr-dev libmpc-dev libisl-dev wget
+
+    mkdir -p /tmp/binutils
+    cd /tmp/binutils
+    wget https://ftp.gnu.org/gnu/binutils/binutils-2.42.tar.xz
+    tar xf binutils-2.42.tar.xz
+
+    mkdir -p /tmp/binutils/build
+    cd /tmp/binutils/build
+
+    ../binutils-2.42/configure \
+        --target=x86_64-linux-gnu \
+        --prefix=/opt/x86_64-linux-gnu \
+        --with-sysroot \
+        --disable-nls \
+        --disable-werror
+
+    make -j$(nproc)
+    sudo make install
+    ```
+
+    If you want to manually build the thunk libraries you'll need an x86 compiler too.
+
 
     ## Configuring
-    If you're building on a RISC-V machine, the default configuration is good enough.
+    If you're building on a RISC-V machine, make sure to set the path to the x86-64 binutils:
     ```
-    cmake -B build
+    cmake -B build -DFELIX86_X86_CROSS="/opt/x86_64-linux-gnu/bin/x86_64-linux-gnu-"
     ```
-    If you're cross-compiling, you need to use the RISC-V CMake toolchain.
+    If you're cross-compiling, you just need to use the RISC-V CMake toolchain and host binutils can be used.
     ```
     cmake -B build -DCMAKE_TOOLCHAIN_FILE=riscv.cmake
     ```
@@ -64,9 +93,17 @@ Make sure [your RISC-V device is supported](./supported-devices.md) before insta
     ```
 
     ## binfmt_misc installation
-    Installing in binfmt_misc allows running privileged applications, such as `sudo`, through the emulator, so it is recommended.
+    You should also install in binfmt_misc with `--binfmt-misc`:
     ```
-    sudo ./build/felix86 -b
+    sudo ./build/felix86 --binfmt-misc
+    ```
+    Each new compilation needs a reinstallation in binfmt_misc.
+
+    Installing with binfmt-misc-setuid allows running privileged applications, such as `sudo`, through the emulator.
+
+    This has some security implications, see [this troubleshooting entry](./troubleshooting.md#privileged-executables-dont-work) to learn more.
+    ```
+    sudo ./build/felix86 --binfmt-misc-setuid
     ```
 
     ## Rootfs
