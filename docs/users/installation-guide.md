@@ -46,7 +46,6 @@ Make sure [your RISC-V device is supported](./supported-devices.md) before insta
         sudo apt install gcc-riscv64-linux-gnu g++-riscv64-linux-gnu
         ```
 
-    ## Preparation
     If compiling on RISC-V hardware, you'll need x86-64 binutils to build the x86-64 VDSO.
 
     If your package manager provides x86-64 binutils, simply install them. Otherwise, you can follow the steps below. This is a one-time installation:
@@ -73,7 +72,7 @@ Make sure [your RISC-V device is supported](./supported-devices.md) before insta
     sudo make install
     ```
 
-    If you want to manually build the thunk libraries you'll need an x86 compiler too.
+    If you want to manually build the thunk libraries you'll need an x86 compiler too. Check out the build.yml workflow to get an idea on how to build them, or install them once using the installation script.
 
 
     ## Configuring
