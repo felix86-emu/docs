@@ -9,6 +9,16 @@ felix86 --shell
 
 This will disable logging and start a bash or zsh shell with a custom prompt.
 
+In felix86 26.08 and later, you can start a program with the --shell command, which runs it via `bash -c` or `zsh -c`, which means it can find your binary in `PATH`:
+```
+felix86 --shell="steam -no-cef-sandbox"
+```
+
+In older verions you can achieve the same like so:
+```
+felix86 /path/to/rootfs/bin/bash -c "steam -no-cef-sandbox"
+```
+
 If you want logging to be enabled, use this command:
 ```bash
 felix86 --shell-debug
@@ -39,6 +49,19 @@ If you want to try a game that is not listed, you can make a compatibility repor
 ## Thunking
 
 There's thunking support for GLX (OpenGL on X11) and Vulkan. You can enable it using `FELIX86_ENABLED_THUNKS=glx,vk`. This should improve performance in games.
+
+## Desktop shortcuts
+
+Desktop shortcuts in Linux are usually XDG Desktop Entry specification files.
+
+The shorcuts usually exist in the host desktop, since the host $HOME is mounted in the guest $HOME, but the binary usually exists inside the rootfs, not the host filesystem. Even if it does exist in the host filesystem, it may be a script that needs to be explicitly run with the x86 bash, so that filesystem accesses are resolved relative to the rootfs.
+
+In order to be able to use it like a normal shortcut, we need to wrap the executable with `felix86 --shell="..."`.
+
+Here's a `sed` one-liner that makes a desktop entry run with felix86:
+```sh
+sed -i -E 's/^Exec=(.*)$/Exec=felix86 --shell="\1"/' myshortcut.desktop
+```
 
 ## Profiles
 

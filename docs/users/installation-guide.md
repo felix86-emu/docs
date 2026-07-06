@@ -48,7 +48,7 @@ Make sure [your RISC-V device is supported](./supported-devices.md) before insta
 
     If compiling on RISC-V hardware, you'll need x86-64 binutils to build the x86-64 VDSO.
 
-    If your package manager provides x86-64 binutils, simply install them. Otherwise, you can follow the steps below. This is a one-time installation:
+    If your package manager provides x86-64 binutils, simply install it. Otherwise, you can follow the steps below. This is a one-time installation:
     ```sh
     sudo apt update
     sudo apt install -y build-essential bison flex texinfo libgmp-dev libmpfr-dev libmpc-dev libisl-dev wget
@@ -80,7 +80,7 @@ Make sure [your RISC-V device is supported](./supported-devices.md) before insta
     ```
     cmake -B build -DFELIX86_X86_CROSS="/opt/x86_64-linux-gnu/bin/x86_64-linux-gnu-"
     ```
-    If you're cross-compiling, you just need to use the RISC-V CMake toolchain and host binutils can be used.
+    If you're cross-compiling on x86 hardware, you just need to use the RISC-V CMake toolchain and host binutils can be used.
     ```
     cmake -B build -DCMAKE_TOOLCHAIN_FILE=riscv.cmake
     ```

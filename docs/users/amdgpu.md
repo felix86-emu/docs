@@ -88,7 +88,7 @@ sudo sed -i 's/^MESA_LOADER/#MESA_LOADER/' /etc/environment
 Afterwards I restore the Bianbu sources, as some packages from the Ubuntu sources will conflict with versions downloaded from Bianbu sources. If you want to tinker further you may remove the Bianbu packages and install Ubuntu packages.
 ```bash
 sudo mv /etc/apt/sources.list.d/bianbu.bak /etc/apt/sources.list.d/bianbu.sources
-sudo mv /etc/apt/sources.list.d/ubuntu.source /etc/apt/sources.list.d/ubuntu.bak
+sudo mv /etc/apt/sources.list.d/ubuntu.sources /etc/apt/sources.list.d/ubuntu.bak
 ```
 
 Finally, update the initramfs:

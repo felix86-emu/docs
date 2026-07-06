@@ -30,3 +30,8 @@ If you're having issues on Wayland, you may need `SDL_VIDEODRIVER=x11`.
 
 !!! tip
     Since felix86 can use `apt`, it may be possible to install Steam through the package manager. This is untested.
+
+You may also want to make the desktop entry work, this command will make it run with felix86:
+```sh
+sed -i -E 's/^Exec=(.*)$/Exec=felix86 --shell="\1"/' ~/Desktop/steam.desktop
+```
