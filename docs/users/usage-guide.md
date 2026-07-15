@@ -63,6 +63,16 @@ Here's a `sed` one-liner that makes a desktop entry run with felix86:
 sed -i -E 's/^Exec=(.*)$/Exec=felix86 --shell="\1"/' myshortcut.desktop
 ```
 
+## Configuration
+
+The configuration file exists at `/etc/opt/felix86/config.toml`.
+
+You can get a specific config by specifying its group and value, for example: `ROOTFS=$(felix86 --get-config general.rootfs_path)`
+
+You can set a specific config in a similar fashion, but it requires administrator privileges: `felix86 --set-config logging.print_signals=true`
+
+To list all configs, use the `-c` option.
+
 ## Profiles
 
 You can use different execution profiles that set multiple configurations at once.

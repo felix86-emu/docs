@@ -34,9 +34,14 @@ sudo rm -rf /path/to/rootfs
 
 ## Deleting configuration files
 
-The felix86 configuration files are stored in `$HOME/.config/felix86`
+The felix86 profile files are stored in `$HOME/.config/felix86`
 ```bash
 rm -rf ~/.config/felix86
+```
+
+The global configuration file is stored in `/etc/opt/felix86/config.toml`
+```bash
+sudo rm /etc/opt/felix86/config.toml
 ```
 
 ## Deleting /opt/felix86
