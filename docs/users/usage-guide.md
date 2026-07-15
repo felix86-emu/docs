@@ -79,7 +79,7 @@ There's currently the following profiles:
 - `paranoid` - Disable almost all optimizations and enable some slow safety checks.
 - `zink` - Enables Vulkan thunking and Zink usage in Mesa.
 
-Each profile is a .toml file in `$HOME/.config/felix86/profiles`. Each profile is a partial or full version of the `$HOME/.config/felix86/config.toml` file, with some configurations changed.
+Each profile is a .toml file in `$HOME/.config/felix86/profiles`. Each profile is a partial or full version of the config file, with some configurations changed.
 
 ## DXVK
 

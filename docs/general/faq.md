@@ -20,8 +20,8 @@ Yes, or ones in $HOME if `FELIX86_MOUNT_HOME` is enabled, which it is by default
 
 As with most configurations, there's two options:
 
-- Set the `rootfs` option in `$HOME/.config/felix86/config.toml`
-    * Can be done using `felix86 -s /path/to/rootfs`
+- Set the `rootfs` option in the config file
+    * Can be done using `sudo felix86 --set-config general.rootfs=/path/to/rootfs`
 - Set the `FELIX86_ROOTFS` environment variable (overrides config value)
 
 
