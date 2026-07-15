@@ -73,6 +73,8 @@ You can set a specific config in a similar fashion, but it requires administrato
 
 To list all configs, use the `-c` option.
 
+Each configuration has a respective environment variable. These can be discovered by reading the configuration file.
+
 ## Profiles
 
 You can use different execution profiles that set multiple configurations at once.
@@ -89,7 +91,7 @@ There's currently the following profiles:
 - `paranoid` - Disable almost all optimizations and enable some slow safety checks.
 - `zink` - Enables Vulkan thunking and Zink usage in Mesa.
 
-Each profile is a .toml file in `$HOME/.config/felix86/profiles`. Each profile is a partial or full version of the config file, with some configurations changed.
+Each profile is a .toml file in `$HOME/.config/felix86/profiles`. Each profile is a partial or full version of the config file, with some configurations changed. You may create new profiles and pass them to `FELIX86_PROFILE` as a name (which will look relative to the profile directory) or as an absolute path.
 
 ## DXVK
 
