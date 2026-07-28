@@ -42,6 +42,6 @@ We keep track of what functions may take a callback. If a function takes a callb
 
 Some libraries may need to do work right after they are loaded. For those, we insert a pointer to a function in the `.init_array`. If some of this work needs to happen in the felix86 side, we need to tell the emulator that the library has loaded. To do this, our `.init_array` function uses `invlpg [rbx]` which notifies the emulator that it has been reached. This is necessary because in felix86 we use the emulated `ld-linux.so` instead of loading the libraries manually.
 
-These overlays are stored by default in `/opt/felix86/lib/x86_64-linux-gnu` and, in the future, in `/opt/felix86/lib/i386-linux-gnu` too. The path to the overlays can be changed with `felix86 -S /path/to/overlays`.
+These overlays are stored by default in `/opt/felix86/lib/x86_64-linux-gnu` and, in the future, in `/opt/felix86/lib/i386-linux-gnu` too. The path to the overlays can be changed with `sudo felix86 --set-config general.thunks_path=/path/to/overlays`.
 
 Some libraries are very cumbersome to fully thunk, but we could benefit from thunking only a few independent functions. One such example is `libc.so.6`. Thunking the entirety of libc is an enormous effort, but if we just thunk `memcpy` we could see improved performance in some games. In the future, we can produce an overlay library on the fly, that is a copy of the original library but thunks a few important functions. 

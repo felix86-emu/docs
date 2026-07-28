@@ -27,7 +27,7 @@ sudo systemctl restart systemd-binfmt
 
 ## Deleting the rootfs
 
-If you don't remember the rootfs path, it can be obtained with `felix86 -g`:
+If you don't remember the rootfs path, it can be obtained with `felix86 --get-config general.rootfs_path`:
 ```bash
 sudo rm -rf /path/to/rootfs
 ```

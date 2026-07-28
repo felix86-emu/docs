@@ -98,7 +98,7 @@ Each profile is a .toml file in `$HOME/.config/felix86/profiles`. Each profile i
 Installing DXVK is as simple as installing it on your host system:
 ```bash
 # Set $ROOTFS to the rootfs absolute path for convenience
-export ROOTFS=$(felix86 -g)
+export ROOTFS=$(felix86 --get-config general.rootfs_path)
 
 # Copy DXVK release inside rootfs
 cp -r /path/to/dxvk-release $ROOTFS/tmp/
