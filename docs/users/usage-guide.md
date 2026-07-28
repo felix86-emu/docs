@@ -100,15 +100,13 @@ Installing DXVK is as simple as installing it on your host system:
 # Set $ROOTFS to the rootfs absolute path for convenience
 export ROOTFS=$(felix86 --get-config general.rootfs_path)
 
-# Copy DXVK release inside rootfs
-cp -r /path/to/dxvk-release $ROOTFS/tmp/
-
 # Enter felix86 shell
 felix86 --shell
 
-# Usually export WINEPREFIX="$HOME/.wine"
-export WINEPREFIX=/path/to/wineprefix
-cd /tmp/dxvk-release
+# Go to dxvk directory
+cd ~/Downloads/dxvk
+
+export WINEPREFIX=$HOME/.wine
 cp x64/*.dll $WINEPREFIX/drive_c/windows/system32
 cp x32/*.dll $WINEPREFIX/drive_c/windows/syswow64
 
@@ -116,6 +114,9 @@ cp x32/*.dll $WINEPREFIX/drive_c/windows/syswow64
 # d3d8, d3d9, d3d10core, d3d11, dxgi.
 winecfg
 ```
+
+!!! note
+    This is assuming you have `FELIX86_MOUNT_HOME` enabled, which is on by default, and that the WINEPREFIX already exists.
 
 Make sure to enable Vulkan thunking for better performance:
 ```bash
