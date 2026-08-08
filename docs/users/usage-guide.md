@@ -175,3 +175,25 @@ felix86 --shell
 
 !!! Warning
     There's currently no 32-bit thunking, so you need to try 64-bit games if you want to use the iGPU. A discrete GPU, like an AMD one, will be able to use the x86 drivers and not require thunking, so 32-bit games will work fine with a discrete GPU. 
+
+
+## MangoHud
+
+felix86 has a custom MangoHud fork that shows some JIT-related information. It may be useful for profiling games.
+
+It is based on the MangoHud FEX integration.
+
+### Installation
+
+You can use this script to install it:
+```shell
+bash <(curl -fsSL https://install.felix86.com/mangohud.sh)
+```
+
+### Usage
+
+You will need to enable thunking: `export FELIX86_ENABLED_THUNKS=vk,wl,glx`
+
+Enable the options via `MANGOHUD_CONFIG=fex_stats=status+hotthreads+jitload+smc+softfloat`.
+
+Set `FELIX86_MANGOHUD=1` for Vulkan apps, or use `/opt/felix86/bin/mangohud` for both OpenGL and Vulkan apps.

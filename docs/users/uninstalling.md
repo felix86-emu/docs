@@ -46,18 +46,20 @@ sudo rm /etc/opt/felix86/config.toml
 
 ## Deleting /opt/felix86
 
-The felix86 binary itself and thunks exist in `/opt/felix86`:
+The felix86 binary itself, thunks, and any other tools exist in `/opt/felix86`:
 ```bash
 sudo rm -rf /opt/felix86
 ```
 
-## Deleting symlinks in /usr/bin
+## Deleting symlinks
 
 ```
-sudo rm /usr/bin/felix86
+sudo rm /usr/local/bin/felix86
 ```
 
-In older versions of felix86 (25.11 and prior) you also need to remove `felix86-mounter`:
+## Deleting Vulkan layer, if felix86 MangoHud is installed
+
+If you installed the felix86 MangoHud fork using [https://install.felix86.com/mangohud.sh](https://install.felix86.com/mangohud.sh), you will need to remove the installed Vulkan layer:
 ```
-sudo rm /usr/bin/felix86-mounter
+sudo rm /usr/local/share/vulkan/implicit_layer.d/felix86-MangoHud.riscv64.json
 ```
