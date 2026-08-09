@@ -61,7 +61,7 @@ sudo rm /usr/local/bin/felix86
 
 ```bash
 for size in 16 24 32 48 96 128; do
-  xdg-icon-resource uninstall --mode user --context apps --size "$size" felix86
+  xdg-icon-resource uninstall --mode user --context apps --size "$size" offtkp-felix86
 done
 ```
 
