@@ -53,13 +53,21 @@ sudo rm -rf /opt/felix86
 
 ## Deleting symlinks
 
-```
+```bash
 sudo rm /usr/local/bin/felix86
+```
+
+## Deleting icons
+
+```bash
+for size in 16 24 32 48 96 128; do
+  xdg-icon-resource uninstall --mode user --context apps --size "$size" felix86
+done
 ```
 
 ## Deleting Vulkan layer, if felix86 MangoHud is installed
 
 If you installed the felix86 MangoHud fork using [https://install.felix86.com/mangohud.sh](https://install.felix86.com/mangohud.sh), you will need to remove the installed Vulkan layer:
-```
+```bash
 sudo rm /usr/local/share/vulkan/implicit_layer.d/felix86-MangoHud.riscv64.json
 ```
