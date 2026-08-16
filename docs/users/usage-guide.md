@@ -194,6 +194,10 @@ bash <(curl -fsSL https://install.felix86.com/mangohud.sh)
 
 You will need to enable thunking: `export FELIX86_ENABLED_THUNKS=vk,wl,glx`
 
-Enable the options via `MANGOHUD_CONFIG=fex_stats=status+hotthreads+jitload+smc+softfloat`.
+Enable the stats in the MangoHud and felix86 side:
+```bash
+export MANGOHUD_CONFIG=fex_stats=status+hotthreads+jitload+smc+softfloat
+export FELIX86_STATS_ENABLED=1
+```
 
 Set `FELIX86_MANGOHUD=1` for Vulkan apps, or use `/opt/felix86/bin/mangohud` for both OpenGL and Vulkan apps.

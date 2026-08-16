@@ -16,6 +16,10 @@ Alternatively, if you just want to run a privileged command once, you can enter 
 sudo felix86 --shell
 ```
 
+#### I still have issues running privileged executables
+
+Is felix86 on a FUSE filesystem, like sshfs, squashfs or overlayfs? binfmt_misc emulators can't run privileged binaries when on FUSE filesystems.
+
 ## AppImages don't work
 
 See [Privileged executables don't work](#privileged-executables-dont-work), since AppImage uses `fusermount3` which is marked as setuid.
