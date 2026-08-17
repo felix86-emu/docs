@@ -15,6 +15,7 @@ Art related to felix86 project:
 - [images/felix86](https://felix86.com/images/felix86.png): Copyright owned by the felix86 project
 - [images/felix86NoThoughts](https://felix86.com/images/felix86NoThoughts.png): non-commercial use
 - [images/felix86Flower](https://felix86.com/images/felix86Flower.png): non-commercial use
+- [images/felix86Business](https://felix86.com/images/felix86Business.png): non-commercial use
 
 
 #### hinya
