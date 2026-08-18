@@ -31,6 +31,9 @@ make k3_bianbu_defconfig
 scripts/config --enable CONFIG_DRM_AMDGPU
 scripts/config --set-val CONFIG_DRM_AMDGPU_SI y
 scripts/config --set-val CONFIG_DRM_AMDGPU_CIK y
+# You may also need these for sound output on the GPU, so enable them
+scripts/config --set-val CONFIG_SND_HDA_INTEL m
+scripts/config --set-val CONFIG_SND_HDA_CODEC_HDMI m
 make olddefconfig
 make -j$(nproc) Image.gz modules dtbs
 make -j$(nproc) INSTALL_MOD_PATH=./staging modules_install
