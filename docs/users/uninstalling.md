@@ -2,7 +2,14 @@
 title: Uninstalling
 ---
 
-To properly uninstall felix86, you need to remove the felix86 binary, the rootfs, and potential binfmt_misc installations.
+To properly uninstall felix86, you need to remove the felix86 binary, the rootfs, and potential binfmt_misc installations, among other things.
+
+The uninstallation script can handle all this for you:
+```shell
+bash <(curl -fsSL https://install.felix86.com/uninstall.sh)
+```
+
+# Manual uninstallation
 
 ## Uninstalling from binfmt_misc
 
@@ -29,7 +36,12 @@ sudo systemctl restart systemd-binfmt
 
 If you don't remember the rootfs path, it can be obtained with `felix86 --get-config general.rootfs_path`:
 ```bash
-sudo rm -rf /path/to/rootfs
+felix86 --get-config general.rootfs_path
+```
+
+If the rootfs lives inside `/opt/felix86` you can skip this step.
+```
+sudo rm -rf /path/to/my/rootfs
 ```
 
 ## Deleting configuration files
@@ -39,9 +51,14 @@ The felix86 profile files are stored in `$HOME/.config/felix86`
 rm -rf ~/.config/felix86
 ```
 
+By default, felix86 will have its own history file that should be removed:
+```bash
+rm -f ~/.felix86_history
+```
+
 The global configuration file is stored in `/etc/opt/felix86/config.toml`
 ```bash
-sudo rm /etc/opt/felix86/config.toml
+sudo rm -rf /etc/opt/felix86
 ```
 
 ## Deleting /opt/felix86
