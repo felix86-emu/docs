@@ -20,8 +20,8 @@ When in JIT code, the following allocation scheme takes place:
 | `rbx` | `x8` / `s0` |
 | `rsp` | `x9` / `s1` |
 | `rbp` | `x18` / `s2` |
-| `rdi` | `x11` / `a1` |
-| `rsi` | `x10` / `a0` |
+| `rdi` | `x10` / `a0` |
+| `rsi` | `x11` / `a1` |
 | `r8` | `x14` / `a4` |
 | `r9` | `x15` / `a5` |
 | `r10` | `x13` / `a3` |
