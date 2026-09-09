@@ -42,4 +42,4 @@ Installing a discrete GPU isn't plug-and-play on current RISC-V hardware. For so
 
 ## Unity games exit without doing anything
 
-Make sure you don't have `SDL_VIDEODRIVER=wayland`, set it to `SDL_VIDEODRIVER=x11` or `SDL_VIDEODRIVER=wayland,x11`. This isn't a felix86 problem, some RISC-V boards define this in `/etc/environment`.
+Make sure you don't have `SDL_VIDEODRIVER=wayland`, set it to `SDL_VIDEODRIVER=x11` or `SDL_VIDEODRIVER=wayland,x11`. This isn't a felix86 problem, some RISC-V distros define this in `/etc/environment`.
