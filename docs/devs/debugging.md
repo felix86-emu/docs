@@ -6,6 +6,11 @@ Debugging is inherently more difficult than most apps, as most of the time you a
 
 ## Important info
 
+If you're going to be debugging, it is recommended you turn off `/proc/self/auxv` emulation as it will mess up the debugger's ability to find symbols. You can do this with:
+```
+sudo felix86 --set-config debugging.proc_self_auxv=false
+```
+
 The emulated state of each process exists in the struct `ThreadState`. "Process" here refers to all cloned/forked processes, whether they are an actual "thread" or not.
 
 This state is statically allocated in the GPR `gp`. This register is disabled for use by the compiler with `-mno-relax`, and shared libraries don't use it either, so we place the `ThreadState` there so it is accessible at all times and even from host debuggers.

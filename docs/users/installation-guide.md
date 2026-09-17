@@ -9,7 +9,7 @@ Make sure [your RISC-V device is supported](./supported-devices.md) before insta
 === "Automatic"
     You can install felix86 using the installation script:
     ```sh
-    bash <(curl -s https://install.felix86.com)
+    curl -fsSL https://install.felix86.com/ | bash
     ```
 
     This script will guide you through installing felix86 and a rootfs.
@@ -17,9 +17,9 @@ Make sure [your RISC-V device is supported](./supported-devices.md) before insta
     !!! example "Reading the script"
         This script is hosted via GitHub Pages and its source code is available at [https://github.com/felix86-emu/install](https://github.com/felix86-emu/install)
 
-        You can also read the script before running it: `curl -s https://install.felix86.com | less`
+        You can also read the script before running it: `curl -fsSL https://install.felix86.com | less`
 
-        Or run it directly from the repository: `bash <(curl -s https://raw.githubusercontent.com/felix86-emu/install/refs/heads/main/index.html)`
+        Or run it directly from the repository: `bash <(curl -fsSL https://raw.githubusercontent.com/felix86-emu/install/refs/heads/main/index.html)`
 
 
 === "Manual"
@@ -108,7 +108,7 @@ Make sure [your RISC-V device is supported](./supported-devices.md) before insta
     ## Rootfs
     You can download a ready-made rootfs using the installation script.
     ```
-    bash <(curl -s https://install.felix86.com/rootfs.sh)
+    bash <(curl -fsSL https://install.felix86.com/rootfs.sh)
     ```
     There's many ways to create an x86 rootfs. The felix86 project uses Docker, but you can also use [Debootstrap](https://wiki.debian.org/Debootstrap) or other similar tools.
 
