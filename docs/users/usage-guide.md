@@ -77,9 +77,28 @@ Each configuration has a respective environment variable. These can be discovere
 
 ## Profiles
 
-You can use different execution profiles that set multiple configurations at once.
+You can set per-game profiles, which are useful for enabling TSO or reduced precision for games that need it, among other options.
 
-Usage:
+If you are running a Steam game, refer to [Steam game profiles](https://felix86.com/docs/users/steam/#profiles).
+
+For non-Steam games and other executables, you can use a toml file in `~/.config/felix86/profiles/executables`.
+
+Let's say you want to enable some options for Celeste and TEKKEN 7 so that they are automatically applied when those executables run.
+
+Create a file called `~/.config/felix86/profiles/executables/my_profiles.toml` and add the settings there. These profiles are parsed in alphabetical order, and the ones that are loaded last override the ones that are loaded first, if multiple profiles target the same executable.
+```
+["Celeste.bin.x86_64"]
+General.enabled_thunks = "glx,vk,wl"
+Performance.unsafe_flags = true
+
+["TekkenGame-Win64-Shipping.exe"]
+General.enabled_thunks = "glx,vk,wl"
+Performance.unsafe_flags = true
+Performance.inaccurate_minmax = true
+```
+Make sure to use the correct executable name. The installer script will add some default profiles in `00-installation-profiles.toml`. 
+
+There's also global profiles. Usage:
 ```
 FELIX86_PROFILE=extreme felix86 --shell
 ```
@@ -91,7 +110,7 @@ There's currently the following profiles:
 - `paranoid` - Disable almost all optimizations and enable some slow safety checks.
 - `zink` - Enables Vulkan thunking and Zink usage in Mesa.
 
-Each profile is a .toml file in `$HOME/.config/felix86/profiles`. Each profile is a partial or full version of the config file, with some configurations changed. You may create new profiles and pass them to `FELIX86_PROFILE` as a name (which will look relative to the profile directory) or as an absolute path.
+Each of these profiles is a .toml file in `$HOME/.config/felix86/profiles`. Each profile is a partial or full version of the config file, with some configurations changed. You may create new profiles and pass them to `FELIX86_PROFILE` as a name (which will look relative to the profile directory) or as an absolute path.
 
 ## DXVK
 
