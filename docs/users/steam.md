@@ -53,3 +53,14 @@ It shouldn't have any issues, but if it does, try with `-no-cef-sandbox`.
 If you're having GPU issues, you can also disable the GPU with `-cef-disable-gpu`.
 
 If you're having issues on Wayland, you may need `SDL_VIDEODRIVER=x11`.
+
+**No Steam icon on taskbar in Bianbu:**
+
+Make a file in `~/.local/share/applications/steamwebhelper.desktop` to match `steamwebhelper` to the Steam icon.
+```
+[Desktop Entry]
+Type=Application
+Name=Steam
+Icon=steam
+NoDisplay=true
+```

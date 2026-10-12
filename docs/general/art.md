@@ -36,3 +36,4 @@ Art related to felix86 project:
 - [images/felix86ScienceIcon](https://felix86.com/images/felix86ScienceIcon.webp): non-commercial use
 - [images/felix86ThinkIcon](https://felix86.com/images/felix86ThinkIcon.webp): non-commercial use
 - [images/felix86TwoYears](https://felix86.com/images/felix86TwoYears.png): non-commercial use
+- [images/felix86Lab](https://felix86.com/images/felix86Lab.png): non-commercial use
