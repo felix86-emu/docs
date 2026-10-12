@@ -46,7 +46,7 @@ reduced_precision = 1
 
 The next time you run the game through Steam the profile will automatically be loaded. Steam **doesn't need to be restarted**, the game will pick up on the file.
 
-#### Troubleshooting
+### Troubleshooting
 
 It shouldn't have any issues, but if it does, try with `-no-cef-sandbox`.
 
